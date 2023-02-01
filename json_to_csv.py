@@ -39,12 +39,14 @@ def to_csv(args: dict) -> None:
         for i in range(0, len(json_data), chunk_size):
             print(f"processing chunk {i}")
             x = json_data[i:i+chunk_size]
-            print(f"extracted chunk {i}")
+            print(f"extracted chunk {i + 1}")
             print("converting to dataframe")
             df = pd.DataFrame(x)
+
             print("writing to csv")
             df.to_csv(output_path, mode='a',
-                      header=not os.path.exists(output_path))
+                      header=not os.path.exists(output_path),
+                      index=False)  # we add index=False to prevent the index column from showing up in the resulting csv
             print(f"write to csv complete for chunk {i}")
 
 
@@ -59,3 +61,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     to_csv(args)
+
+
+# python json_to_csv.py --path=D:\devStrawhat\dataEngProjects\replicatingSpotifyWrapped\data\json\streamingHistory\StreamingHistoryPartTwo.json --output_file=streamingHistory --chunk_size=10000 --should_overwrite=False
