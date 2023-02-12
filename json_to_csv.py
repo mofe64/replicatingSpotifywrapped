@@ -52,7 +52,8 @@ def to_csv(args: dict) -> None:
 
 if __name__ == '__main__':
     parser.add_argument('--path', help='path to json file')
-    parser.add_argument('--output_file', help='password for postgress')
+    parser.add_argument('--output_file',
+                        help='file name for generated csv file')
     parser.add_argument(
         '--chunk_size', help='size of chunks in which to process data')
 
